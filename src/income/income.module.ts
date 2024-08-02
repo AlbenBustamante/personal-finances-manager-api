@@ -10,5 +10,6 @@ import { Income, IncomeSchema } from './income.schema';
   ],
   providers: [IncomeService],
   controllers: [IncomeController],
+  exports: [IncomeService],
 })
 export class IncomeModule {}

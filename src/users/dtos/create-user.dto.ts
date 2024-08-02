@@ -3,4 +3,5 @@ export interface CreateUserDto {
   email: string;
   password: string;
   repeatPassword: string;
+  salary: number;
 }

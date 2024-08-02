@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Income } from './income.schema';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { CreateIncomeDto } from './dtos/create-income.dto';
 
 @Injectable()
@@ -17,5 +17,17 @@ export class IncomeService {
 
   async getAll(): Promise<Income[]> {
     return this.incomeModel.find().exec();
+  }
+
+  async getByUser(userId: string): Promise<Income[]> {
+    return this.incomeModel.find({ userId: userId }).exec();
+  }
+
+  async getTotalByUser(userId: string): Promise<number> {
+    const result = await this.incomeModel.aggregate([
+      { $match: { userId: new mongoose.Types.ObjectId(userId) } },
+      { $group: { _id: null, total: { $sum: '$value' } } },
+    ]);
+    return result[0]?.total || 0;
   }
 }
