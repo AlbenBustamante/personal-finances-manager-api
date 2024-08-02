@@ -1,16 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-export type ExpenseDocument = HydratedDocument<Expense>;
+export type IncomeDocument = HydratedDocument<Income>;
 
 @Schema({
-  timestamps: true,
   toJSON: {
     getters: true,
     aliases: true,
   },
+  timestamps: true,
 })
-export class Expense {
+export class Income {
   @Prop({ required: true })
   description: string;
 
@@ -21,4 +21,4 @@ export class Expense {
   category: string;
 }
 
-export const ExpenseSchema = SchemaFactory.createForClass(Expense);
+export const IncomeSchema = SchemaFactory.createForClass(Income);
