@@ -5,6 +5,7 @@ import { TurnsModule } from './turns/turns.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
+import { ExpensesModule } from './expenses/expenses.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UsersModule } from './users/users.module';
     MongooseModule.forRoot(process.env.DB_URL),
     TurnsModule,
     UsersModule,
+    ExpensesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
