@@ -3,6 +3,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { ExpensesService } from 'src/expenses/expenses.service';
 import { IncomeService } from 'src/income/income.service';
+import { DebtsService } from 'src/debts/debts.service';
 
 @Controller('users')
 export class UsersController {
@@ -10,6 +11,7 @@ export class UsersController {
     private readonly userService: UsersService,
     private readonly expenseService: ExpensesService,
     private readonly incomeService: IncomeService,
+    private readonly debtService: DebtsService,
   ) {}
 
   @Post()
@@ -43,6 +45,11 @@ export class UsersController {
     const balance = income - expenses;
 
     return { balance };
+  }
+
+  @Get(':id/debts')
+  async getDebts(@Param('id') id: string) {
+    return this.debtService.getByUser(id);
   }
 
   @Delete(':id')
