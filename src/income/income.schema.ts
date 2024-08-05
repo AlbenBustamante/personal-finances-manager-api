@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { User } from 'src/users/users.schema';
 
 export type IncomeDocument = HydratedDocument<Income>;
 
@@ -21,7 +22,7 @@ export class Income {
   category: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
-  userId: string;
+  userId: User;
 
   @Prop({ required: true })
   date: Date;

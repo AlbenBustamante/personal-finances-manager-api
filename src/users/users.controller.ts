@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { ExpensesService } from 'src/expenses/expenses.service';
 import { IncomeService } from 'src/income/income.service';
 import { DebtsService } from 'src/debts/debts.service';
+import { TurnsService } from 'src/turns/turns.service';
 
 @Controller('users')
 export class UsersController {
@@ -12,6 +13,7 @@ export class UsersController {
     private readonly expenseService: ExpensesService,
     private readonly incomeService: IncomeService,
     private readonly debtService: DebtsService,
+    private readonly turnService: TurnsService,
   ) {}
 
   @Post()
@@ -50,6 +52,11 @@ export class UsersController {
   @Get(':id/debts')
   async getDebts(@Param('id') id: string) {
     return this.debtService.getByUser(id);
+  }
+
+  @Get(':id/turns')
+  async getTurns(@Param('id') id: string) {
+    return this.turnService.getAllByUser(id);
   }
 
   @Delete(':id')

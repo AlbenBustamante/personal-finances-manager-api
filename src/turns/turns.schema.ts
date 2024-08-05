@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import { v7 as uuid } from 'uuid';
+import mongoose, { HydratedDocument } from 'mongoose';
+import { User } from 'src/users/users.schema';
 
 export type TurnDocument = HydratedDocument<Turn>;
 
@@ -12,14 +12,8 @@ export type TurnDocument = HydratedDocument<Turn>;
   timestamps: true,
 })
 export class Turn {
-  @Prop({
-    type: String,
-    unique: true,
-    default: function genUUID() {
-      return uuid();
-    },
-  })
-  id: string;
+  @Prop({ required: true })
+  date: Date;
 
   @Prop({ required: true })
   initialHour: Date;
@@ -32,6 +26,12 @@ export class Turn {
 
   @Prop({ required: false })
   finalBreakHour: Date;
+
+  @Prop({ required: true })
+  salary: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+  userId: User;
 }
 
 export const TurnSchema = SchemaFactory.createForClass(Turn);
