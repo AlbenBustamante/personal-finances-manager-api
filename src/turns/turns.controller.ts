@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { TurnsService } from './turns.service';
 import { CreateTurnDto } from './dtos/create-turn.dto';
 
@@ -7,7 +7,7 @@ export class TurnsController {
   constructor(private readonly turnService: TurnsService) {}
 
   @Post()
-  create(createTurnDto: CreateTurnDto) {
+  create(@Body() createTurnDto: CreateTurnDto) {
     return this.turnService.create(createTurnDto);
   }
 }
