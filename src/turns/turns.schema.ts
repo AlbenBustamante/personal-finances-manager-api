@@ -28,7 +28,7 @@ export class Turn {
   finalBreakHour: Date;
 
   @Prop({ required: true })
-  salary: string;
+  salary: number;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
   userId: User;
